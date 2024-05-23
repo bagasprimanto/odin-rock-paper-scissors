@@ -99,6 +99,14 @@
 
             console.log(`The computer's score is ${computerScore}`);
             console.log(`The human's score is ${humanScore}`);
+            
+            if(humanScore > computerScore) {
+                console.log("Humans win!");
+            } else if (humanScore === computerScore) {
+                console.log("It's a draw!");
+            } else {
+                console.log("Computers win!");
+            }
         }
 
         playGame();
