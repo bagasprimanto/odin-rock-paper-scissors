@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function playGame() {
+            let humanScore = 0;
+            let computerScore = 0;
+    
+            function getComputerChoice() {
+                let choice = parseInt(Math.random() * 3);
+    
+                if(choice === 0) {
+                    choice = "rock";
+                } else if (choice === 1) {
+                    choice = "paper";
+                } else {
+                    choice = "scissors";
+                }
+    
+                return choice;
+            }
+    
+            function getHumanChoice() {
+                let choice = prompt('Please enter your choice:');
+    
+                return choice;
+            }
+    
+            function playRound(humanChoice, computerChoice) {
+                let caseInsensitiveHumanChoice = humanChoice.toLowerCase();
+    
+                if(humanChoice === "rock") {
+                    switch (computerChoice) {
+                        case "rock":
+                            console.log("Draw! Rock can't beat rock");
+                            break;
+                        case "paper" :
+                            console.log("You lose! Paper beats rock");
+                            computerScore++;
+                            break;
+                        case "scissors":
+                            console.log("You win! Rock beats scissors");
+                            humanScore++;
+                            break;
+                        default:
+                            console.log("Unknown command");
+                            break;
+                    }
+                } else if (humanChoice === "paper") {
+                    switch (computerChoice) {
+                        case "rock":
+                            console.log("You win! Paper beats rock");
+                            humanScore++;
+                            break;
+                        case "paper" :
+                            console.log("Draw! Paper can't beats paper");
+                            break;
+                        case "scissors":
+                            console.log("You lose! Scissors beat paper");
+                            computerScore++;
+                            break;
+                        default:
+                            console.log("Unknown command");
+                            break;
+                    }
+                } else if (humanChoice === "scissors") {
+                    switch (computerChoice) {
+                        case "rock":
+                            console.log("You lose! Rock beats scissors");
+                            computerScore++;
+                            break;
+                        case "paper" :
+                            console.log("You win! Scissors beat paper");
+                            humanScore++;
+                            break;
+                        case "scissors":
+                            console.log("Draw! Scissors can't beat scissors");
+                            break;
+                        default:
+                            console.log("Unknown command");
+                            break;
+                    }
+                } else {
+                    console.log("Unknown human command");
+                }
+            }
+
+            playRound(getHumanChoice(), getComputerChoice());
+            playRound(getHumanChoice(), getComputerChoice());
+            playRound(getHumanChoice(), getComputerChoice());
+            playRound(getHumanChoice(), getComputerChoice());
+            playRound(getHumanChoice(), getComputerChoice());
+
+            console.log(`The computer's score is ${computerScore}`);
+            console.log(`The human's score is ${humanScore}`);
+        }
+
+        playGame();
+    </script>
+</body>
+</html>
