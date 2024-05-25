@@ -9,8 +9,8 @@
     <button id="rock">Rock</button>
     <button id="paper">Paper</button>
     <button id="scissors">Scissors</button>
-    <div>Human: <span id="human-score"></span></div>
-    <div>Computer: <span id="computer-score"></span></div>
+    <div>Human: <span id="human-score">0</span></div>
+    <div>Computer: <span id="computer-score">0</span></div>
     <div id="result"></div>
 
     <script>
@@ -45,11 +45,11 @@
                         break;
                     case "paper" :
                         result.textContent = "You lose! Paper beats rock";
-                        // computerScore++;
+                        incComputerScore();
                         break;
                     case "scissors":
                         result.textContent = "You win! Rock beats scissors";
-                        // humanScore++;
+                        incHumanScore();
                         break;
                     default:
                         result.textContent = "Unknown command";
@@ -59,14 +59,14 @@
                 switch (computerChoice) {
                     case "rock":
                         result.textContent = "You win! Paper beats rock";
-                        // humanScore++;
+                        incHumanScore();
                         break;
                     case "paper" :
                         result.textContent = "Draw! Paper can't beats paper";
                         break;
                     case "scissors":
                         result.textContent = "You lose! Scissors beat paper";
-                        // computerScore++;
+                        incComputerScore();
                         break;
                     default:
                         result.textContent = "Unknown command";
@@ -76,11 +76,11 @@
                 switch (computerChoice) {
                     case "rock":
                         result.textContent = "You lose! Rock beats scissors";
-                        // computerScore++;
+                        incComputerScore();
                         break;
                     case "paper" :
                         result.textContent = "You win! Scissors beat paper";
-                        // humanScore++;
+                        incHumanScore();
                         break;
                     case "scissors":
                         result.textContent = "Draw! Scissors can't beat scissors";
@@ -94,23 +94,19 @@
             }
         }
 
-        // function playGame() {
-        //     let humanScore = 0;
-        //     let computerScore = 0;
+        function incHumanScore() {
+            let hs = humanScore.textContent;
+            hs = parseInt(hs);
+            hs++;
+            humanScore.textContent = hs;
+        }
 
-        //     console.log(`The computer's score is ${computerScore}`);
-        //     console.log(`The human's score is ${humanScore}`);
-            
-        //     if(humanScore > computerScore) {
-        //         console.log("Humans win!");
-        //     } else if (humanScore === computerScore) {
-        //         console.log("It's a draw!");
-        //     } else {
-        //         console.log("Computers win!");
-        //     }
-        // }
-
-        // playGame();
+        function incComputerScore() {
+            let cs = computerScore.textContent;
+            cs = parseInt(cs);
+            cs++;
+            computerScore.textContent = cs;
+        }
 
         btnRock.addEventListener("click", () => {
             playRound("rock", getComputerChoice())
