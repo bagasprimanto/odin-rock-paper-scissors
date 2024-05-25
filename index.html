@@ -9,9 +9,10 @@
     <button id="rock">Rock</button>
     <button id="paper">Paper</button>
     <button id="scissors">Scissors</button>
-    <div>Human: <span id="human-score">0</span></div>
-    <div>Computer: <span id="computer-score">0</span></div>
+    <div>Human: <span id="human-score">0</span> points</div>
+    <div>Computer: <span id="computer-score">0</span> points</div>
     <div id="result"></div>
+    <div id="game-result"></div>
 
     <script>
         const btnRock = document.querySelector("#rock");
@@ -20,6 +21,9 @@
         const humanScore = document.querySelector("#human-score");
         const computerScore = document.querySelector("#computer-score");
         const result = document.querySelector("#result");
+        const gameResult = document.querySelector("#game-result");
+        let hs = 0;
+        let cs = 0;
 
         function getComputerChoice() {
             let choice = Math.floor(Math.random() * 3);
@@ -36,76 +40,90 @@
         }
 
         function playRound(humanChoice, computerChoice) {
-            let caseInsensitiveHumanChoice = humanChoice.toLowerCase();
-
-            if(humanChoice === "rock") {
-                switch (computerChoice) {
-                    case "rock":
-                        result.textContent = "Draw! Rock can't beat rock";
-                        break;
-                    case "paper" :
-                        result.textContent = "You lose! Paper beats rock";
-                        incComputerScore();
-                        break;
-                    case "scissors":
-                        result.textContent = "You win! Rock beats scissors";
-                        incHumanScore();
-                        break;
-                    default:
-                        result.textContent = "Unknown command";
-                        break;
+            if(hs < 5 && cs < 5) {
+                let caseInsensitiveHumanChoice = humanChoice.toLowerCase();
+    
+                if(humanChoice === "rock") {
+                    switch (computerChoice) {
+                        case "rock":
+                            result.textContent = "Draw! Rock can't beat rock";
+                            break;
+                        case "paper" :
+                            result.textContent = "You lose! Paper beats rock";
+                            incComputerScore();
+                            break;
+                        case "scissors":
+                            result.textContent = "You win! Rock beats scissors";
+                            incHumanScore();
+                            break;
+                        default:
+                            result.textContent = "Unknown command";
+                            break;
+                    }
+                } else if (humanChoice === "paper") {
+                    switch (computerChoice) {
+                        case "rock":
+                            result.textContent = "You win! Paper beats rock";
+                            incHumanScore();
+                            break;
+                        case "paper" :
+                            result.textContent = "Draw! Paper can't beats paper";
+                            break;
+                        case "scissors":
+                            result.textContent = "You lose! Scissors beat paper";
+                            incComputerScore();
+                            break;
+                        default:
+                            result.textContent = "Unknown command";
+                            break;
+                    }
+                } else if (humanChoice === "scissors") {
+                    switch (computerChoice) {
+                        case "rock":
+                            result.textContent = "You lose! Rock beats scissors";
+                            incComputerScore();
+                            break;
+                        case "paper" :
+                            result.textContent = "You win! Scissors beat paper";
+                            incHumanScore();
+                            break;
+                        case "scissors":
+                            result.textContent = "Draw! Scissors can't beat scissors";
+                            break;
+                        default:
+                            result.textContent = "Unknown command";
+                            break;
+                    }
+                } else {
+                    result.textContent = "Unknown command";
                 }
-            } else if (humanChoice === "paper") {
-                switch (computerChoice) {
-                    case "rock":
-                        result.textContent = "You win! Paper beats rock";
-                        incHumanScore();
-                        break;
-                    case "paper" :
-                        result.textContent = "Draw! Paper can't beats paper";
-                        break;
-                    case "scissors":
-                        result.textContent = "You lose! Scissors beat paper";
-                        incComputerScore();
-                        break;
-                    default:
-                        result.textContent = "Unknown command";
-                        break;
-                }
-            } else if (humanChoice === "scissors") {
-                switch (computerChoice) {
-                    case "rock":
-                        result.textContent = "You lose! Rock beats scissors";
-                        incComputerScore();
-                        break;
-                    case "paper" :
-                        result.textContent = "You win! Scissors beat paper";
-                        incHumanScore();
-                        break;
-                    case "scissors":
-                        result.textContent = "Draw! Scissors can't beat scissors";
-                        break;
-                    default:
-                        result.textContent = "Unknown command";
-                        break;
-                }
-            } else {
-                result.textContent = "Unknown command";
             }
         }
 
         function incHumanScore() {
-            let hs = humanScore.textContent;
-            hs = parseInt(hs);
             hs++;
             humanScore.textContent = hs;
+            checkGame();
         }
 
         function incComputerScore() {
-            let cs = computerScore.textContent;
-            cs = parseInt(cs);
             cs++;
             computerScore.textContent = cs;
+            checkGame();
+        }
+
+        function checkGame() {
+            if (hs === 5 || cs === 5) {
+                announceWinner();
+            }
+        }
+
+        function announceWinner() {
+            if (hs === 5) {
+                gameResult.textContent = "Congratulations! Human player wins!";
+            } else {
+                gameResult.textContent = "Better luck next time :( Computer wins!";
+            }
         }
 
         btnRock.addEventListener("click", () => {
