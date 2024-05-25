@@ -103,16 +103,16 @@
         function incHumanScore() {
             hs++;
             humanScore.textContent = hs;
-            checkGame();
+            checkGameCondition();
         }
 
         function incComputerScore() {
             cs++;
             computerScore.textContent = cs;
-            checkGame();
+            checkGameCondition();
         }
 
-        function checkGame() {
+        function checkGameCondition() {
             if (hs === 5 || cs === 5) {
                 announceWinner();
             }
