@@ -40,7 +40,7 @@
         }
 
         function playRound(humanChoice, computerChoice) {
-            if(hs < 5 && cs < 5) {
+            if(checkGameCondition()) {
                 let caseInsensitiveHumanChoice = humanChoice.toLowerCase();
     
                 if(humanChoice === "rock") {
@@ -115,7 +115,10 @@
         function checkGameCondition() {
             if (hs === 5 || cs === 5) {
                 announceWinner();
+                return false;
             }
+
+            return true;
         }
 
         function announceWinner() {
